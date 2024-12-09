@@ -2,7 +2,9 @@ version: 2
 
 project_name: stackit-cert-manager-webhook
 snapshot:
-  name_template: '{{ .Tag }}-SNAPSHOT'
+  version_template: '{{ .Tag }}-SNAPSHOT'
+
+
 builds:
   - id: stackit-cert-manager-webhook
     goos:
@@ -41,6 +43,7 @@ dockers:
   - id: stackit-cert-manager-webhook-amd64
     use: buildx
     image_templates:
+      - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}-amd64"
       - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}"
       - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:latest"
       - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .ShortCommit }}"
@@ -60,6 +63,7 @@ dockers:
   - id: stackit-cert-manager-webhook-arm64
     use: buildx
     image_templates:
+      - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}-arm64"
       - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}"
       - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:latest"
       - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .ShortCommit }}"
