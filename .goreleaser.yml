@@ -76,11 +76,11 @@ dockers:
       - --platform=linux/arm64
     skip_push: false
 
-# https://goreleaser.com/cookbooks/multi-platform-docker-images/
+# https://goreleaser.com/cookbooks/multi-platform-docker-images
 docker_manifests:
   - name_template: "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}"
     image_templates:
       - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}-amd64"
       - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}-arm64"
-      - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .ShortCommit }}"
-      - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:latest"
+      # - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .ShortCommit }}"
+      # - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:latest"
