@@ -4,7 +4,6 @@ project_name: stackit-cert-manager-webhook
 snapshot:
   version_template: '{{ .Tag }}-SNAPSHOT'
 
-
 builds:
   - id: stackit-cert-manager-webhook
     goos:
@@ -44,8 +43,6 @@ dockers:
     use: buildx
     image_templates:
       - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}-amd64"
-      - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}"
-      - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:latest"
       - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .ShortCommit }}"
     goos: linux
     goarch: amd64
@@ -58,8 +55,7 @@ dockers:
       - --label=org.opencontainers.image.created={{ time "2006-01-02T15:04:05Z07:00" }}
       - --label=org.opencontainers.image.revision={{ .FullCommit }}
       - --label=org.opencontainers.image.licenses=Apache-2.0
-      - --label=org.opencontainers.image.platform.os=linux
-      - --label=org.opencontainers.image.platform.architecture=amd64
+      - --platform=linux/amd64
     skip_push: false
 
   - id: stackit-cert-manager-webhook-arm64
@@ -81,5 +77,11 @@ dockers:
       - --label=org.opencontainers.image.revision={{ .FullCommit }}
       - --label=org.opencontainers.image.licenses=Apache-2.0
       - --label=org.opencontainers.image.platform.os=linux
-      - --label=org.opencontainers.image.platform.architecture=arm64
+      - --platform=linux/arm64
     skip_push: false
+
+docker_manifests:
+  - name_template: "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}"
+    image_templates:
+      - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}-amd64"
+      - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}-arm64"
