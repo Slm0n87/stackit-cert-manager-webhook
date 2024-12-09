@@ -41,9 +41,9 @@ dockers:
   - id: stackit-cert-manager-webhook-amd64
     use: buildx
     image_templates:
-      - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}"
-      - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:latest"
-      - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .ShortCommit }}"
+      - "{{ lower .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}"
+      - "{{ lower .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:latest"
+      - "{{ lower .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .ShortCommit }}"
     goos: linux
     goarch: amd64
     build_flag_templates:
@@ -60,9 +60,9 @@ dockers:
   - id: stackit-cert-manager-webhook-arm64
     use: buildx
     image_templates:
-      - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}"
-      - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:latest"
-      - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .ShortCommit }}"
+      - "{{ lower .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .Tag }}"
+      - "{{ lower .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:latest"
+      - "{{ lower .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .ShortCommit }}"
     goos: linux
     goarch: arm64
     build_flag_templates:
