@@ -43,7 +43,9 @@ dockers:
       - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:latest"
       - "{{ .Env.REGISTRY }}/{{ .Env.IMAGE_NAME }}:{{ .ShortCommit }}"
     goos: linux
-    goarch: amd64
+    goarch:
+      - amd64
+      - arm64
     build_flag_templates:
       - --label=org.opencontainers.image.title={{ .ProjectName }}
       - --label=org.opencontainers.image.description=stackit cert manager webhook for dns01 challenges
